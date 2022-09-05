@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  web:
+    build: ./web
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/app
+
+  server:
+    build: ./server
+    ports:
+      - 5000:5000
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server:/app
+    networks:
+      - my-network
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - my-network
+
+  db:
+    image: postgres
+    container_name: db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file:
+      - ./server/.env
+    networks:
+      - my-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - ./server/.env.pgadmin
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - my-network
+
+networks:
+  my-network:
+
+
+volumes:
+  postgres-data:
+  pgadmin-data:
