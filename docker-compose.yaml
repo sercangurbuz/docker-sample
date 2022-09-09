@@ -7,6 +7,7 @@ services:
       - 3000:3000
     volumes:
       - ./web:/app
+      - /app/node_modules
 
   server:
     build: ./server
@@ -16,6 +17,7 @@ services:
       - ./server/.env
     volumes:
       - ./server:/app
+      - /app/node_modules
     networks:
       - my-network
 
