@@ -6,7 +6,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": [
-      "/home/sercan/samples/docker-sample/server/tsconfig.json"
+      "../server/tsconfig.json"
     ]
   },
   "extends": "airbnb-typescript/base",
